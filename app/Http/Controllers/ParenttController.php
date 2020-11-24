@@ -2,84 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ParentRequest;
 use App\Models\Parentt;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class ParenttController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Получение списка всех учителей
      *
-     * @return \Illuminate\Http\Response
+     * @param ParentRequest $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(ParentRequest $request)
     {
-        //
+        return response()->json(Parentt::all(), 200);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Получение одного учителя
      *
-     * @return \Illuminate\Http\Response
+     * @param Parentt $student
+     * @param ParentRequest $request
+     * @return JsonResponse
      */
-    public function create()
+    public function show(Parentt $parent, ParentRequest $request)
     {
-        //
+        return response()->json($parent, 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Обновление учителя
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ParentRequest $request
+     * @param Parentt $parent
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function update(ParentRequest $request, Parentt $parent)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Parentt  $parentt
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Parentt $parentt)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Parentt  $parentt
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Parentt $parentt)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Parentt  $parentt
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Parentt $parentt)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Parentt  $parentt
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Parentt $parentt)
-    {
-        //
+        $parent->update($request->all());
+        return response()->json($parent, 200);
     }
 }

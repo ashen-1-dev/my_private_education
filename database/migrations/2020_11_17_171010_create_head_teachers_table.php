@@ -16,18 +16,21 @@ class CreateHeadTeachersTable extends Migration
         Schema::create('head_teachers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
             $table->string('photo')->nullable();
             $table->string('first_name')->nullable();
             $table->string('second_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('phone_number')->nullable();
-            $table->string('activity')->nullable();
             $table->string('address')->nullable();
+            $table->string('passport')->nullable();
+            $table->string('activity')->nullable();
+            $table->unsignedTinyInteger('experience')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

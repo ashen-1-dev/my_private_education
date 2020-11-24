@@ -6,7 +6,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Validator;
 
 class User extends Authenticatable
 {
@@ -34,31 +33,25 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function validate($params)
-    {
-        $validator = Validator::make($params, $this->rules);
-        if ($validator->passes()) {
-            return true;
-        }
-        $this->errors = $validator->messages();
-        return false;
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class,'users_roles');
-    }
-
     /**
-     * @param mixed ...$roles
+     * @param $role
      * @return bool
      */
-    public function hasRole(... $roles) {
-        foreach ($roles as $role) {
-            if ($this->roles->contains('name', $role)) {
-                return true;
-            }
+    public function hasRole($role) {
+        if ($this->role->contains('name', $role)) {
+            return true;
         }
         return false;
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function headteacher()
+    {
+        return $this->hasOne(HeadTeacher::class);
+    }
+
 }

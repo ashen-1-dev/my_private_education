@@ -2,84 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HeadTeacherRequest;
 use App\Models\HeadTeacher;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class HeadTeacherController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Получение списка всех завучей
      *
-     * @return \Illuminate\Http\Response
+     * @param HeadTeacherRequest $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(HeadTeacherRequest $request)
     {
-        //
+        return response()->json(HeadTeacher::all(), 200);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Получение одного завуча
      *
-     * @return \Illuminate\Http\Response
+     * @param HeadTeacher $headteacher
+     * @param HeadTeacherRequest $request
+     * @return JsonResponse
      */
-    public function create()
+    public function show(HeadTeacher $headteacher, HeadTeacherRequest $request)
     {
-        //
+        return response()->json($headteacher, 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Обновление завуча
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param HeadTeacherRequest $request
+     * @param HeadTeacher $headteacher
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function update(HeadTeacherRequest $request, HeadTeacher $headteacher)
     {
-        //
+        $headteacher->update($request->all());
+        return response()->json($headteacher, 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\HeadTeacher  $headTeacher
-     * @return \Illuminate\Http\Response
-     */
-    public function show(HeadTeacher $headTeacher)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\HeadTeacher  $headTeacher
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(HeadTeacher $headTeacher)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\HeadTeacher  $headTeacher
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, HeadTeacher $headTeacher)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\HeadTeacher  $headTeacher
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(HeadTeacher $headTeacher)
-    {
-        //
-    }
 }
