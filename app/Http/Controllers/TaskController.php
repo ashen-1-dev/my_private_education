@@ -50,10 +50,10 @@ class TaskController extends Controller
 //            ->get();
 //        return $tasks;
         if (is_int((int)$request->count) && ((int)$request->count)>0 && ((int)$request->count)<= 100) {
-            return Task::paginate($request->count)->withPath("api/tasks?count=$request->count");
+            return DB::table('tasks')->orderBy('updated_at', 'Desc')->paginate($request->count)->withPath("api/tasks?count=$request->count");
         }
 
-        return Task::paginate(10)->withPath('api/tasks');
+        return DB::table('tasks')->orderBy('updated_at', 'Desc')->paginate(10)->withPath('/api/tasks');
 
 
     }
