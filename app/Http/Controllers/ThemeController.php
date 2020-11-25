@@ -23,7 +23,7 @@ class ThemeController extends Controller
     }
 
     public function show(){
-        return Subject::all();
+        return Theme::all();
     }
 
     public function edit(Theme $theme, Request $request) {
@@ -40,6 +40,6 @@ class ThemeController extends Controller
     public function delete(Theme $theme) {
         $theme->delete();
 
-        return 'Task №' . $theme->id . ' has been deleted';
+        return 'Theme №' . $theme->id . ' has been deleted';
     }
 }

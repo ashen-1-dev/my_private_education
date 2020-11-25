@@ -37,6 +37,6 @@ class SubjectController extends Controller
     public function delete(Subject $subject)
     {
         $subject->delete();
-        return 'Task №' . $subject->id . ' has been deleted';
+        return 'Subject №' . $subject->id . ' has been deleted';
     }
 }
