@@ -25,6 +25,15 @@ Route::group(['prefix' => 'tasks'], function () {
     Route::put('task}', 'TaskController@editTask')->name('edit_task_route'); // Изменить задание {id}
     Route::delete('{task}', 'TaskController@deleteTask')->name('delete_task_route'); // Удалить задание {id}
 });
+Route::get('/subjects', 'App\Http\Controllers\SubjectController@show');
+Route::post('/subjects', 'App\Http\Controllers\SubjectController@create');
+Route::delete('/subjects/{subject}', 'App\Http\Controllers\SubjectController@delete');
+Route::put('/subjects/{subject}', 'App\Http\Controllers\SubjectController@edit');
+
+Route::get('/themes', 'App\Http\Controllers\ThemeController@show');
+Route::post('/themes', 'App\Http\Controllers\ThemeController@create');
+Route::delete('/themes/{theme}', 'App\Http\Controllers\ThemeController@delete');
+Route::put('/themes/{theme]', 'App\Http\Controllers\ThemeController@edit');
 
 Route::get('headteachers', 'HeadTeacherController@index'); //получение списка всех завучей
 Route::group(['prefix' => 'profile/headteacher'], function () {
